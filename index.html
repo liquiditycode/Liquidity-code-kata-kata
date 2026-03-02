@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquidity Code Dashboard</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --bg-dark: #020617;
+        }
+
+        body { 
+            background-color: var(--bg-dark); 
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            color: white;
+            padding-top: 100px;
+        }
+
+        /* Navbar Fixed & Glassmorphism */
+        .nav-fixed {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            max-width: 1200px;
+            z-index: 1000;
+            background: rgba(8, 10, 15, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 100px;
+            padding: 10px 16px 10px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Animasi Marquee */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee { display: flex; width: 200%; animation: marquee 15s linear infinite; }
+
+        /* Spotlight Effect */
+        .spotlight-card { position: relative; overflow: hidden; display: flex; flex-direction: column; }
+        .spotlight-overlay {
+            position: absolute; inset: 0; pointer-events: none;
+            background: radial-gradient(600px circle at var(--x, 0px) var(--y, 0px), rgba(59, 130, 246, 0.15), transparent 40%);
+        }
+
+        .hidden-card { display: none !important; }
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-fixed">
+        <div class="flex items-center">
+            <span class="text-white font-bold text-sm md:text-lg tracking-tight">Liquidity <span class="text-blue-500 font-medium">code</span></span>
+        </div>
+        
+        <div class="flex items-center gap-3 md:gap-8">
+            <div class="flex items-center gap-3 md:gap-8 text-[10px] md:text-sm font-medium">
+                <a href="#" class="text-slate-400 hover:text-white transition-colors">Home</a>
+                <a href="#" class="text-slate-400 hover:text-white transition-colors">Info</a>
+                <a href="#" class="bg-white text-black px-3 py-1.5 md:px-6 md:py-2.5 rounded-full font-bold hover:bg-slate-200 transition-all shadow-lg text-[9px] md:text-sm">Developer</a>
+            </div>
+
+            <div class="flex items-center gap-2 md:gap-4 border-l border-white/10 pl-3 md:pl-6">
+                <button class="text-slate-500 hover:text-white transition-colors text-lg md:text-xl">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-6xl mx-auto px-4 mt-8">
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="spotlight-card col-span-1 md:col-span-2 bg-slate-900/40 border border-white/10 rounded-[2.5rem] p-8 h-72 justify-between">
+                <div class="spotlight-overlay"></div>
+                <div class="z-10">
+                    <h3 class="text-xl font-bold text-white mb-2">Tujuan Liquidity Code</h3>
+                    <p class="text-slate-400 text-sm max-w-sm">Pengalaman trading lebih mudah, cepat, dan profitable untuk semua member.</p>
+                </div>
+                <div class="relative w-full overflow-hidden pb-4">
+                    <div class="animate-marquee whitespace-nowrap opacity-10">
+                        <span class="text-6xl font-black text-blue-500 mr-12">LIQUIDITY CODE</span>
+                        <span class="text-6xl font-black text-blue-500 mr-12">LIQUIDITY CODE</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="spotlight-card bg-slate-900/40 border border-white/10 rounded-[2.5rem] p-8 h-72 justify-between">
+                <div class="spotlight-overlay"></div>
+                <div>
+                    <div class="w-12 h-12 bg-blue-500/20 text-blue-400 rounded-2xl flex items-center justify-center mb-4 text-2xl">
+                        <i class="fas fa-globe-asia"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white">Indonesia</h3>
+                </div>
+                <div>
+                    <p class="text-xs text-slate-500 uppercase tracking-widest mb-1 font-mono">Local Time</p>
+                    <p id="local-time" class="text-4xl font-bold font-mono text-blue-400">00:00:00</p>
+                </div>
+            </div>
+
+            <div class="spotlight-card bg-slate-900/40 border border-white/10 rounded-[2.5rem] p-8 h-64 justify-center gap-6">
+                <div class="spotlight-overlay"></div>
+                <span class="w-fit flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-500/10 text-green-400 text-xs font-bold uppercase tracking-wider">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Join VIP
+                </span>
+                <div class="flex items-center gap-6 text-3xl text-slate-400 relative z-10">
+                    <a href="https://wa.me/62881011915106" target="_blank" class="hover:text-green-500 transition-all hover:scale-125"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.instagram.com/liquidty_code_ind" target="_blank" class="hover:text-pink-500 transition-all hover:scale-125"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@midzzzzzz7" target="_blank" class="hover:text-white transition-all hover:scale-125"><i class="fab fa-tiktok"></i></a>
+                    <button id="btn-show" onclick="toggleController()" class="hidden hover:text-blue-400 transition-all hover:scale-125">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="card-quote" class="spotlight-card col-span-1 md:col-span-2 bg-gradient-to-br from-blue-700 to-indigo-900 text-white rounded-[2.5rem] p-10 min-h-64 justify-center relative overflow-hidden">
+                <div class="spotlight-overlay"></div>
+                <i class="fas fa-quote-right absolute -bottom-4 -right-4 text-9xl opacity-10"></i>
+                <h3 id="changing-text" class="text-2xl md:text-3xl font-bold leading-tight relative z-10 italic">
+                    "Stop random entry. join grup trading Liquidity code analisa real, eksekusi bareng bareng"
+                </h3>
+                <div class="mt-8 relative z-10 flex items-center gap-3">
+                    <div class="w-10 h-[2px] bg-blue-300"></div>
+                    <p class="text-blue-200 font-mono text-sm tracking-widest uppercase">Khai</p>
+                </div>
+            </div>
+
+            <div id="controller-card" class="spotlight-card bg-slate-800/80 border border-white/10 text-white rounded-[2.5rem] p-8 min-h-64 justify-between transition-all shadow-2xl">
+                <div class="spotlight-overlay"></div>
+                <div class="z-10">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-lg font-bold flex items-center gap-2"><i class="fas fa-pen-nib text-blue-400"></i> ganti teks card 4</h3>
+                        <button onclick="toggleController()" class="text-slate-500 hover:text-red-400 p-2"><i class="fas fa-eye-slash"></i></button>
+                    </div>
+                    <textarea id="input-text" class="w-full h-24 p-4 rounded-2xl bg-slate-950/50 border border-white/5 text-sm text-slate-300 focus:outline-none focus:border-blue-500 resize-none transition-all" placeholder="Ketik pesan baru..."></textarea>
+                </div>
+                <button onclick="updateQuote()" class="z-10 w-full py-4 mt-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-bold active:scale-95 transition-all shadow-lg shadow-blue-600/20">Update Teks</button>
+            </div>
+        </div>
+
+        <div class="bg-slate-900/40 p-8 md:p-12 rounded-[2.5rem] border border-white/10 max-w-2xl mx-auto mb-20 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-50"></div>
+            <h2 class="text-3xl font-bold text-center text-white mb-10">Kirim Pesan</h2>
+            <form class="space-y-5" id="contact-form">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <input type="text" class="w-full px-5 py-4 rounded-2xl bg-white/5 border border-white/10 focus:border-blue-500 outline-none text-white transition-all" placeholder="Nama Lengkap" required>
+                    <input type="email" class="w-full px-5 py-4 rounded-2xl bg-white/5 border border-white/10 focus:border-blue-500 outline-none text-white transition-all" placeholder="Email" required>
+                </div>
+                <textarea rows="4" class="w-full px-5 py-4 rounded-2xl bg-white/5 border border-white/10 focus:border-blue-500 outline-none text-white transition-all resize-none" placeholder="Tulis pesan kamu..." required></textarea>
+                <button type="submit" class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-bold text-lg transition-all active:scale-[0.98]">Kirim Pesan</button>
+            </form>
+        </div>
+
+        <footer class="py-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
+            <div class="flex items-center gap-6 mb-6 md:mb-0">
+                <a href="https://www.instagram.com/liquidty_code_ind" target="_blank" class="hover:text-blue-500 transition-colors">Instagram</a>
+            </div>
+            <div class="font-mono opacity-60">© 2026 <span class="text-white font-bold">Khai</span>. All rights reserved.</div>
+        </footer>
+    </div>
+
+    <div class="fixed bottom-8 right-8 flex flex-col gap-4 z-[100]">
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="w-12 h-12 bg-slate-800/80 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white shadow-xl hover:text-blue-400 transition-all">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        <a href="https://wa.me/62881011915106" target="_blank" class="w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform relative group">
+            <span class="absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-30 animate-ping group-hover:hidden"></span>
+            <i class="fab fa-whatsapp text-3xl z-10"></i>
+        </a>
+    </div>
+
+    <script>
+        function updateClock() {
+            const timeEl = document.getElementById('local-time');
+            const now = new Date();
+            timeEl.textContent = now.toLocaleTimeString('en-GB', { timeZone: 'Asia/Jakarta', hour12: false });
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        function updateQuote() {
+            const input = document.getElementById('input-text');
+            const display = document.getElementById('changing-text');
+            if (input.value.trim() !== "") {
+                display.style.opacity = "0";
+                setTimeout(() => {
+                    display.textContent = `"${input.value}"`;
+                    display.style.opacity = "1";
+                    input.value = "";
+                }, 300);
+            }
+        }
+
+        function toggleController() {
+            const card5 = document.getElementById('controller-card');
+            const btnShow = document.getElementById('btn-show');
+            if (card5.classList.contains('hidden-card')) {
+                card5.classList.remove('hidden-card');
+                btnShow.classList.add('hidden');
+            } else {
+                card5.classList.add('hidden-card');
+                btnShow.classList.remove('hidden');
+            }
+        }
+
+        document.querySelectorAll('.spotlight-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                card.style.setProperty('--x', `${e.clientX - rect.left}px`);
+                card.style.setProperty('--y', `${e.clientY - rect.top}px`);
+            });
+        });
+    </script>
+</body>
+</html>
